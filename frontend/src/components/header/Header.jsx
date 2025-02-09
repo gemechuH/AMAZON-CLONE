@@ -67,7 +67,7 @@ const Header = () => {
             </div>
             <div className={classes.carts}>
               <div className={classes.carts_cart}>
-                <IoCartOutline size={40}/>
+                <IoCartOutline size={50}/>
                 <span>0</span>
               </div>
               <span>cart</span>
