@@ -1,0 +1,147 @@
+/* body{
+    background: #131921;
+} */
+ 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+ *{
+    padding: 0;
+    margin: 0;
+ }
+
+.header__container{
+    background: #131921;
+    display: flex;
+    height: 100px;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    /* border:  1px solid red; */
+    font-family: 'poppins';
+    color: white;
+    
+}
+.logo__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 250px;
+     /* border:  1px solid green; */
+     padding: 10px;
+}
+.logo__container img{
+    width: 80%;
+    padding-top: 5px;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+.delivery{
+    display: flex;
+    font-family: 'poppins';
+    align-items: center;
+    color: white;
+    /* border:  1px solid green; */
+
+}
+.search{
+    display: flex;
+   
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 40%;
+    margin: 2%;
+    /* border: outset; */
+    border:  1px solid white;
+    
+    /* padding: 20px; */
+    /* height: 0px; */
+    
+}
+.search select{
+    font-family: 'poppins';
+    padding: 10px;
+    /* background: transparent; */
+/*  */
+    
+}
+.search input{ 
+    width: 100%;
+    padding: 10px;
+}
+
+.info{
+    display: flex;
+    /* border:  1px solid green; */
+    width: auto;
+    gap: 40px;
+}
+ .country{
+    display: flex;
+    /* border:  1px solid red; */
+    align-items: center;
+
+}
+.country img{
+    width: 20px;
+    height: 30px;
+    align-items: center;
+}
+.country select{
+    width: 50px;
+    /* border:  1px solid red; */
+
+    align-items: center;
+    background: transparent;
+    color: white;
+}
+.country option{
+    height: 10px;
+    width: 10px;
+    /* border:  1px solid green; */
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    font-family: 'poppins';
+     /* border:  1px solid rgb(244, 76, 25); */
+     padding: 10px;
+     text-decoration: none;
+    
+}
+.form a{
+    text-decoration: none;
+    color: white;
+}
+.form span{
+    display: flex;
+
+}
+.orders{
+    padding: 10px;
+    
+
+}
+.orders a{
+    color: white;
+    text-decoration: none;
+}
+
+.carts{
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+}
+
+.carts .carts_cart{
+    position: relative;
+}
+.carts .carts_cart span{
+    position: absolute;
+    top: 0;
+    left: 2;
+
+}
+.header__container a:hover{
+    border: 1px solid white;
+}
