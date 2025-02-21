@@ -10,17 +10,18 @@ const CarouselEffect = () => {
               autoPlay={true}
               infiniteLoop={true}
               showIndicators={false}
-              showThumbs={false}
+        showThumbs={false}
+        
           >
               {
-                  imgs.map((imageItemLink) => {
-                      return <img src={imageItemLink}/>
+                  imgs.map((imageItemLink ,index) => {
+                      return <img src={imageItemLink} key={index}/>
                   })
              }
               
           </Carousel>
           <div className={classes.hero__img}>
-              hdsj
+              
           </div>
     </div>
   )

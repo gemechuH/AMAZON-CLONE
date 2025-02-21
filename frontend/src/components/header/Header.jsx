@@ -4,6 +4,8 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaCaretDown, FaCartPlus } from "react-icons/fa";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
+import LowerHeader from "./LowerHeader";
+import {Link} from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -11,13 +13,13 @@ const Header = () => {
       <div className={classes.header__container}>
         <div className={classes.logo__container}>
           {/* logo */}
-          <a href="">
+          <Link to='/'>
             <img
               src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
               alt="amazon logo"
               width={80}
             />
-          </a>
+          </Link>
           <div className={classes.delivery}>
             <span>
               {/* location logo */}
@@ -41,7 +43,7 @@ const Header = () => {
         {/* right side link */}
 
         <div className={classes.order__container}>
-          <a href="" className={classes.language}>
+          <Link to='' className={classes.language}>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Flag_of_the_United_States_%28Pantone%29.svg"
               alt="flag"
@@ -51,24 +53,25 @@ const Header = () => {
                 <option value="">EN</option>
               </select>
             </section>
-          </a>
+          </Link>
 
-          <a href="">
+          <Link to='/auth'>
             
               <p>Sign In</p>
               <span>Account & Lists</span>
             
-          </a>
-          <a href="">
+          </Link>
+          <Link to='/orders'>
             <p>returns</p>
             <span>& Orders</span>
-          </a>
-          <a href="" className={classes.cart}>
+          </Link>
+          <Link to='/cart' className={classes.cart}>
             <FaCartPlus size={30}/>
             <span>0</span>
-          </a>
+          </Link>
         </div>
       </div>
+      <LowerHeader/>
     </section>
   );
 };

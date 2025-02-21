@@ -44,7 +44,7 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 50px; /* Adjust spacing as needed */
   justify-content: center;
-  border: 2px solid green;
+  
   margin: 100px auto 100px auto;
   
 }

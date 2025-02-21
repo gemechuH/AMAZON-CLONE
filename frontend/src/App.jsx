@@ -1,17 +1,15 @@
+import "./App.css";
+import Routing from "./Routing";
 
-
-import './App.css'
-import Header from './components/header/Header'
 
 function App() {
+  return <>
   
-
-  return (
-    <>
-     <Header/>
-      
-    </>
-  )
+  <Routing/>
+ 
+  
+  
+  </>;
 }
 
-export default App
+export default App;

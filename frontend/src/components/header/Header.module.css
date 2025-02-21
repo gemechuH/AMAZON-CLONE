@@ -103,6 +103,7 @@
 
 .language img{
     width: 40%;
+    border-radius: 50% ;
 }
 .cart{
     position: relative;
