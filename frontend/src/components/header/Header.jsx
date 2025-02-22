@@ -5,15 +5,18 @@ import { FaCaretDown, FaCartPlus } from "react-icons/fa";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import LowerHeader from "./LowerHeader";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'; // Import useSelector
 
 const Header = () => {
+  // Get cart items from Redux store
+  const cartItems = useSelector((state) => state.cart.cartItems);
   return (
-    <section>
+    <section className={classes.fixed}>
       <div className={classes.header__container}>
         <div className={classes.logo__container}>
           {/* logo */}
-          <Link to='/'>
+          <Link to="/">
             <img
               src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
               alt="amazon logo"
@@ -38,12 +41,12 @@ const Header = () => {
           </select>
           <input type="search" placeholder="search for the products...." />
           {/* search icon */}
-          <CiSearch size={25}/>
+          <CiSearch size={25} />
         </div>
         {/* right side link */}
 
         <div className={classes.order__container}>
-          <Link to='' className={classes.language}>
+          <Link to="" className={classes.language}>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Flag_of_the_United_States_%28Pantone%29.svg"
               alt="flag"
@@ -55,23 +58,21 @@ const Header = () => {
             </section>
           </Link>
 
-          <Link to='/auth'>
-            
-              <p>Sign In</p>
-              <span>Account & Lists</span>
-            
+          <Link to="/auth">
+            <p>Sign In</p>
+            <span>Account & Lists</span>
           </Link>
-          <Link to='/orders'>
+          <Link to="/orders">
             <p>returns</p>
             <span>& Orders</span>
           </Link>
-          <Link to='/cart' className={classes.cart}>
-            <FaCartPlus size={30}/>
-            <span>0</span>
+          <Link to="/cart" className={classes.cart}>
+            <FaCartPlus size={30} />
+            <span>{cartItems.length}</span>
           </Link>
         </div>
       </div>
-      <LowerHeader/>
+      <LowerHeader />
     </section>
   );
 };

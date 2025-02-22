@@ -1,49 +1,35 @@
-export const catagoryData= [
+export const catagoryData = [
   {
-    id: 1,
-    name: "Leather Handbag",
-    category: "accessories",
-    description: "Stylish leather handbag with ample storage space.",
-    price: 79.99,
-    oldPrice: 99.99,
+    
+    title: "Jewelery",
+    name: "jewelery",
+
     image:
-      "https://images.unsplash.com/photo-1512201078372-9c6b2a0d528a?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    color: "black",
-    rating: 4.5,
-    author: "admin",
+      "https://plus.unsplash.com/premium_photo-1709033404514-c3953af680b4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    id: 2,
-    name: "Evening Gown",
-    category: "dress",
+  
+    title: "Women's clothing",
+    name: "women's clothing",
     description: "Elegant evening gown for special occasions.",
-    price: 149.99,
-    oldPrice: 199.99,
+
     image:
-      "https://images.unsplash.com/photo-1568251188392-ae32f898cb3b?q=80&w=2062&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    color: "red",
-    rating: 4.0,
+      "https://images.unsplash.com/photo-1669479033025-01bc44921fff?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    id: 3,
-    name: "Gold Necklace",
-    category: "jewellery",
-    description: "Exquisite gold necklace with intricate design.",
-    price: 199.99,
+    
+    title: "Men's clothing",
+    name: "men's clothing",
+
     image:
-      "https://images.unsplash.com/photo-1631097969294-c38afba59496?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    color: "gold",
-    rating: 4.7,
+      "https://images.unsplash.com/photo-1610652492500-ded49ceeb378?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    id: 4,
-    name: "Matte Lipstick",
-    category: "cosmetics",
-    description: "Long-lasting matte lipstick in various shades.",
-    price: 19.99,
+    
+    title: "Electronics",
+    name: "electronics",
+
     image:
-      "https://images.unsplash.com/photo-1631214500115-598fc2cb8d2d?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    color: "red",
-    rating: 4.2,
+      "https://images.unsplash.com/photo-1667589179475-6ddb8f8cd89a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
