@@ -1,16 +1,30 @@
 import React from "react";
 import classes from "./Header.module.css"
-import { IoLocationOutline } from "react-icons/io5";
+
 import { FaCaretDown, FaCartPlus } from "react-icons/fa";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
-import { IoCartOutline } from "react-icons/io5";
+
 import LowerHeader from "./LowerHeader";
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'; // Import useSelector
+import { useDispatch, useSelector } from 'react-redux'; // Import useSelector
+import { signOut } from "firebase/auth";
+import { auth } from "../../utility/firebase";
+import { logoutUser } from "../../redux/authSlice";
 
 const Header = () => {
   // Get cart items from Redux store
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const user = useSelector((state) => state.auth.user); // Get user from Redux
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      dispatch(logoutUser())
+    }).catch((error) => {
+      console.log("logout error", error.message)
+    })
+  }
+
   return (
     <section className={classes.fixed}>
       <div className={classes.header__container}>
@@ -58,9 +72,18 @@ const Header = () => {
             </section>
           </Link>
 
-          <Link to="/auth">
-            <p>Sign In</p>
-            <span>Account & Lists</span>
+          <Link to={!user && "/SignUp"}>
+            {user ? (
+              <>
+                <h5>Hello, {user}</h5>
+                <span onClick={handleLogout}>LogOut</span>
+              </>
+            ) : (
+              <>
+                <p>sign in</p>
+                <span>account & lists</span>{" "}
+              </>
+            )}
           </Link>
           <Link to="/orders">
             <p>returns</p>
