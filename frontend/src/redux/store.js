@@ -18,6 +18,7 @@ const store = configureStore({
     cart: cartReducer,
     auth: persistedAuthReducer,
   },
+ 
 });
 
 const persistor = persistStore(store);  // Create a persistor for the store

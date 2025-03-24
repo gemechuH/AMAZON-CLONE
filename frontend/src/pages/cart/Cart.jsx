@@ -3,8 +3,9 @@ import Layout from '../../components/layout/Layout'
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, clearCart, increaseQuantity, decreaseQuantity } from "../../redux/cartSlice";
 import classes from './Cart.module.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Cart = () => {
+  const navigator = useNavigate()
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
    const totalPrice = cartItems.reduce(
@@ -12,6 +13,13 @@ const Cart = () => {
      0
    );
   const dispatch = useDispatch();
+
+  const handleCheckout = () => {
+    navigator("/payments" ,
+    {
+        state: {cartItems, totalPrice, totalQuantity}
+      })
+  }
 
   return (
     <>
@@ -69,7 +77,7 @@ const Cart = () => {
                 <small>this orders contains a gifts</small>
               </span>
               <Link to="/payments">
-                <button className={classes.item_checkout_btn}>
+                <button className={classes.item_checkout_btn} onClick={handleCheckout}>
                   continue to Checkout
                 </button>
               </Link>

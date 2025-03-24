@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/authSlice';
 import {setPersistence, browserSessionPersistence, browserLocalPersistence} from 'firebase/auth'
 // import { auth } from "../firebaseConfig"; 
-// import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth'
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");

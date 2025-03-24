@@ -8,7 +8,7 @@ const Catagory = () => {
     <section className={classes.Catagory__container}>
           {
               catagoryData.map((dataInfo) => (
-                  <CatagoryCard data={dataInfo} key={dataInfo.id}/>
+                  <CatagoryCard data={dataInfo} key={dataInfo.image}/>
               ))
       }
     </section>
