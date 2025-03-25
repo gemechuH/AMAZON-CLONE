@@ -3,6 +3,7 @@ import Layout from "../../components/layout/Layout";
 import { useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
 import { db } from "../../utility/firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 
 import classes from "./Payment.module.css";
@@ -15,7 +16,7 @@ const Payment = () => {
   
   const totalQuantity = useSelector((state) => state.cart?.totalQuantity);
   const [prossing, setprossing] = useState(false);
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth?.user);
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -61,16 +62,29 @@ if (!user || !user.uid) {
       
 
      
-      await db
-        .collection("users")
-        .doc(user.uid)
-        .collection("orders")
-        .doc(paymentIntent.id)
-        .set({
-          cart: cart,
-          amount: paymentIntent.amount,
-          created: paymentIntent.created,
-        });
+      // await db
+      //   .collection("users")
+      //   .doc(user.uid)
+      //   .collection("orders")
+      //   .doc(paymentIntent.id)
+      //   .set({
+      //     cartItems: cartItems,
+      //     amount: paymentIntent.amount / 100,
+      //     created: paymentIntent.created,
+      //     paymentStatus: paymentIntent.status,
+      //     shippingAddress: user.address || "",
+      //     userEmail: user.email,
+      //     orderDate: new Date().toISOString(),
+      //   });
+       const orderRef = doc(db, "users", user.uid, "orders", paymentIntent.id);
+       await setDoc(orderRef, {
+         cartItems: cartItems,
+         amount: paymentIntent.amount / 100,
+         created: paymentIntent.created,
+         paymentStatus: paymentIntent.status,
+         userEmail: user.email,
+         orderDate: new Date().toISOString(),
+       });
      
       
 
@@ -103,8 +117,8 @@ if (!user || !user.uid) {
                   />
                   <div>
                     {/* <h5>{item?.title}</h5> */}
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Price: ${item.price}</p>
+                    <p>Quantity: {item?.quantity}</p>
+                    <p>Price: ${item?.price}</p>
                   </div>
                 </div>
               </div>

@@ -10,8 +10,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginUser: (state, action) => {
-      state.user = action.payload; // Store user email after login
-      // state.email=  action.payload.email,
+      state.user = {
+        uid: action.payload.uid || null, // Store user email after login
+        email: action.payload.email || null,
+        // displayName: action.payload.displayName || null,
+      };
       state.loggedIn = true;
     },
     logoutUser: (state) => {

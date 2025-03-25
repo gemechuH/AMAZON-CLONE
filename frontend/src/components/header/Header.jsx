@@ -75,7 +75,7 @@ const Header = () => {
           <Link to={!user && "/SignUp"}>
             {user ? (
               <>
-                <h5>Hello, {user}</h5>
+                <h5>Hello, {user?.email}</h5>
                 <span onClick={handleLogout}>LogOut</span>
               </>
             ) : (
@@ -91,7 +91,7 @@ const Header = () => {
           </Link>
           <Link to="/cart" className={classes.cart}>
             <FaCartPlus size={30} />
-            <span>{cartItems.length}</span>
+            <span>{cartItems?.length}</span>
           </Link>
         </div>
       </div>
