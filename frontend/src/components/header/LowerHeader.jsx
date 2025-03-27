@@ -9,7 +9,7 @@ const LowerHeader = () => {
         <ul>
           <li>
             <span>
-              <IoMdMenu size={25}/>
+              <IoMdMenu size={25} />
               <p>All</p>
             </span>
           </li>
@@ -19,6 +19,9 @@ const LowerHeader = () => {
           <li>Gift Card</li>
           <li>Sell</li>
         </ul>
+        <div className={classes.my}>
+          <small>developed by Gemechu hunduma</small>
+        </div>
       </div>
     </>
   );

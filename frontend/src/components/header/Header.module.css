@@ -174,3 +174,12 @@
     }
 
 }
+.lower__container{
+    display: space-between;
+}
+
+.my{
+    padding-left: 750px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #e8be15;
+}

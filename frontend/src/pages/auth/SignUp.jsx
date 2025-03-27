@@ -1,69 +1,73 @@
-import React from 'react'
-import {Link, useNavigate} from 'react-router-dom'
-import { useState } from 'react';
-import classes from './SignUp.module.css'
-import { auth } from '../../utility/firebase';
-import {BeatLoader} from 'react-spinners'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/authSlice';
-import {setPersistence, browserSessionPersistence, browserLocalPersistence} from 'firebase/auth'
-// import { auth } from "../firebaseConfig"; 
-
+import React from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import classes from "./SignUp.module.css";
+import { auth } from "../../utility/firebase";
+import { BeatLoader } from "react-spinners";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/authSlice";
+import { setPersistence, browserLocalPersistence } from "firebase/auth";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [loading, setLoading] = useState(false);
-  const [loadingSignIn, setLoadingSignIn] = useState(false); // Loading state for Sign In
-  const [loadingSignUp, setLoadingSignUp] = useState(false); // Loading state for Sign Up
+  const [loadingSignIn, setLoadingSignIn] = useState(false);
+  const [loadingSignUp, setLoadingSignUp] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useDispatch()
 
-  setPersistence(auth, browserLocalPersistence) // ✅ Use local persistence
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  setPersistence(auth, browserLocalPersistence)
     .then(() => console.log("Persistence enabled"))
     .catch((error) => console.error("Persistence error:", error));
 
-  // Sign In Function
+  const handleAuthSuccess = (userCredential) => {
+    const user = userCredential.user;
+    dispatch(
+      loginUser({
+        uid: user.uid,
+        email: user.email,
+      })
+    );
+
+    // Navigate to the protected route or home
+    const from = location.state?.from || "/";
+    navigate(from, { replace: true });
+  };
+
   const handleer = async (e) => {
     e.preventDefault();
-    // setLoading(true);
-    setError(""); // Clear any previous errors
-    const action = e.target.name; // Get the button name
+    setError("");
+    const action = e.target.name;
 
     if (action === "signIn") {
       setLoadingSignIn(true);
       signInWithEmailAndPassword(auth, email, password)
-        .then((userCerdential) => {
-          const userEmail = userCerdential.user.email
-          const username = userEmail.split("@")[0].trim()
-           dispatch(loginUser(username));
-          
-          setError("Sign in successful! ✅"); // Show success message
-          navigate("/");
+        .then((userCredential) => {
+          handleAuthSuccess(userCredential);
+          setError("Sign in successful! ✅");
         })
         .catch((error) => {
           setError(error.message);
         })
-        .finally(() => setLoadingSignIn(false)); // Stop loading
-      // .finally(() => setLoading(false));
+        .finally(() => setLoadingSignIn(false));
     } else if (action === "signUp") {
       setLoadingSignUp(true);
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCerdential) => {
-          const userEmail = userCerdential.user.email;
-          const username = userEmail.split("@")[0].trim()
-          dispatch(loginUser(username))
-
-          setError("Sign up successful! 🎉 Now you can sign in.");
-          navigate("/");
+        .then((userCredential) => {
+          handleAuthSuccess(userCredential);
+          setError("Sign up successful! 🎉");
         })
         .catch((error) => {
           setError(error.message);
         })
-        .finally(() => setLoadingSignUp(false)); // Stop loading
-      // .finally(() => setLoading(false));
+        .finally(() => setLoadingSignUp(false));
     }
   };
 
@@ -78,7 +82,6 @@ const SignUp = () => {
       </Link>
       <div className={classes.form}>
         <h2>Sign in to Amazon</h2>
-        {/* Error Message */}
         {error && <p className={classes.errorMessage}>{error}</p>}
         <label>Email</label>
         <input
@@ -118,4 +121,5 @@ const SignUp = () => {
     </div>
   );
 };
-export default SignUp
+
+export default SignUp;

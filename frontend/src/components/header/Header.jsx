@@ -11,7 +11,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../utility/firebase";
 import { logoutUser } from "../../redux/authSlice";
 
-const Header = () => {
+const Header =() => {
   // Get cart items from Redux store
   const cartItems = useSelector((state) => state.cart.cartItems);
   const user = useSelector((state) => state.auth.user); // Get user from Redux

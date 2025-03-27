@@ -1,23 +1,27 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
-import { useSelector } from "react-redux";
+
 import { ClipLoader } from "react-spinners";
 import { db } from "../../utility/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
-
+import { clearCart } from "../../redux/cartSlice";
+import { useSelector, useDispatch } from "react-redux"; 
 
 import classes from "./Payment.module.css";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { axiosBase_URL } from "../../components/api/axiosBase";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart?.cartItems);
   
   const totalQuantity = useSelector((state) => state.cart?.totalQuantity);
   const [prossing, setprossing] = useState(false);
   const user = useSelector((state) => state.auth?.user);
 
+  const navigate = useNavigate()
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -34,7 +38,12 @@ const Payment = () => {
   };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
+       if (!user || !user.uid) {
+         navigate("/SignUp");
+         console.error("User is not defined. Cannot store order.");
+         return; // Stop execution if `user` is not available
+       }
     // step 1 to connect with backend || functions
     setprossing(true);
     try {
@@ -42,7 +51,7 @@ const Payment = () => {
         method: "POST",
         url: `/payment/create?total=${totalPrice * 100}`,
       });
-      console.log(response.data)
+      console.log(response.data);
       const clientsecret = response.data?.clientSecret;
 
       //step 2 the confarmation of the payment
@@ -53,42 +62,28 @@ const Payment = () => {
       });
       console.log(confirmation);
 
-if (!user || !user.uid) {
-  console.error("User is not defined. Cannot store order.");
-  return; // Stop execution if `user` is not available
-}
+      //       if (!user || !user.uid) {
+      //   navigate("/SignUp")
+      //   console.error("User is not defined. Cannot store order.");
+      //   return; // Stop execution if `user` is not available
+      // }
 
       const paymentIntent = confirmation.paymentIntent; // Get paymentIntent from confirmation
-      
 
-     
-      // await db
-      //   .collection("users")
-      //   .doc(user.uid)
-      //   .collection("orders")
-      //   .doc(paymentIntent.id)
-      //   .set({
-      //     cartItems: cartItems,
-      //     amount: paymentIntent.amount / 100,
-      //     created: paymentIntent.created,
-      //     paymentStatus: paymentIntent.status,
-      //     shippingAddress: user.address || "",
-      //     userEmail: user.email,
-      //     orderDate: new Date().toISOString(),
-      //   });
-       const orderRef = doc(db, "users", user.uid, "orders", paymentIntent.id);
-       await setDoc(orderRef, {
-         cartItems: cartItems,
-         amount: paymentIntent.amount / 100,
-         created: paymentIntent.created,
-         paymentStatus: paymentIntent.status,
-         userEmail: user.email,
-         orderDate: new Date().toISOString(),
-       });
-     
-      
+      const orderRef = doc(db, "users", user.uid, "orders", paymentIntent.id);
+      await setDoc(orderRef, {
+        cartItems: cartItems,
+        amount: paymentIntent.amount / 100,
+        created: paymentIntent.created,
+        paymentStatus: paymentIntent.status,
+        userEmail: user.email,
+        orderDate: new Date().toISOString(),
+      });
+
+      dispatch(clearCart()); // Add this line to clear the cart
 
       setprossing(false);
+      navigate("/orders", { state: { msg: "you are placed new orders" } });
     } catch (error) {
       // console.log(error);
       console.log("Error processing payment:", error);

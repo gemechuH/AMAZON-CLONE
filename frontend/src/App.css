@@ -3,3 +3,7 @@
 body{
     font-family: 'poppins';
 }
+.red-toast {
+  background-color: #ff6b6b !important;
+  color: white !important;
+}
