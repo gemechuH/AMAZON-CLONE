@@ -39,6 +39,7 @@ const Payment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user || !user.uid) {
+      setCardError("Please sign in to complete your purchase");
       navigate("/SignUp");
       console.error("User is not defined. Cannot store order.");
       return; // Stop execution if `user` is not available
@@ -49,6 +50,9 @@ const Payment = () => {
       const response = await axiosBase_URL({
         method: "POST",
         url: `/payment/create?total=${totalPrice * 100}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       console.log(response.data);
       const clientsecret = response.data?.clientSecret;
