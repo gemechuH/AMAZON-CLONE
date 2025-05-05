@@ -50,9 +50,7 @@ const Payment = () => {
       const response = await axiosBase_URL({
         method: "POST",
         url: `/payment/create?total=${totalPrice * 100}`,
-        headers: {
-          "Content-Type": "application/json",
-        },
+       
       });
       console.log(response.data);
       const clientsecret = response.data?.clientSecret;
