@@ -7,3 +7,16 @@ body{
   background-color: #ff6b6b !important;
   color: white !important;
 }
+
+/* Make your toast prettier */
+.Toastify__toast--info {
+  background: linear-gradient(45deg, #6dd5ed, #2193b0);
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.Toastify__progress-bar {
+  background: #ffffff;
+}

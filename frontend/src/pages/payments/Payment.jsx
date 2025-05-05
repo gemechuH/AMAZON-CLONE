@@ -5,7 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { db } from "../../utility/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { clearCart } from "../../redux/cartSlice";
-import { useSelector, useDispatch } from "react-redux"; 
+import { useSelector, useDispatch } from "react-redux";
 
 import classes from "./Payment.module.css";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
@@ -16,12 +16,12 @@ import { useNavigate } from "react-router-dom";
 const Payment = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart?.cartItems);
-  
+
   const totalQuantity = useSelector((state) => state.cart?.totalQuantity);
   const [prossing, setprossing] = useState(false);
   const user = useSelector((state) => state.auth?.user);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -32,18 +32,17 @@ const Payment = () => {
   const elements = useElements();
 
   const handleChange = (e) => {
-    
-    console.log(e)
+    console.log(e);
     e?.error?.message ? setCardError(e?.error?.message) : setCardError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-       if (!user || !user.uid) {
-         navigate("/SignUp");
-         console.error("User is not defined. Cannot store order.");
-         return; // Stop execution if `user` is not available
-       }
+    if (!user || !user.uid) {
+      navigate("/SignUp");
+      console.error("User is not defined. Cannot store order.");
+      return; // Stop execution if `user` is not available
+    }
     // step 1 to connect with backend || functions
     setprossing(true);
     try {
@@ -127,10 +126,7 @@ const Payment = () => {
           <div className={classes.payment_card_container}>
             <form action="" onSubmit={handleSubmit}>
               {cardError && <small style={{ color: "red" }}>{cardError}</small>}
-              <CardElement
-            
-                className={classes.vise_card}
-              />
+              <CardElement className={classes.vise_card} />
               <div>
                 <div>
                   <span>Total price | ${totalPrice}</span>
@@ -153,7 +149,6 @@ const Payment = () => {
       </>
     </Layout>
   );
-  
 };
 
 export default Payment;
